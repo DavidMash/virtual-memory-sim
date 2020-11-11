@@ -16,6 +16,7 @@ public class PageTable{
 	int numProcs; //number of processes using the page table
 
 	//init with size in KB, and the memory split between processes
+	@SuppressWarnings("unchecked")
 	public PageTable(int numFrames, int[] split){
 		numProcs  = split.length;
 		frames = new int[numProcs];
@@ -49,7 +50,6 @@ public class PageTable{
 		}
 	}
 
-	//
 	public void add(MemoryAccess access){
 		int p = access.getProcess();
 
@@ -86,15 +86,15 @@ public class PageTable{
 		}
 	}
 
-	private int indexToEvict(int process){
+	private int indexToEvict(int p){
 		boolean found = false;
 		MemoryAccess a;
 		while(!found){ //search until we find index to evict
 
-			if(pointer[process] >= list[process].size()) pointer[process] = 0;
+			if(pointer[p] >= list[p].size()) pointer[p] = 0;
 
-			for(; pointer[process] < list[process].size() && !found; pointer[process]++){
-				a = list[process].get(pointer[process]);
+			for(; pointer[p] < list[p].size() && !found; pointer[p]++){
+				a = list[p].get(pointer[p]);
 
 				if(!a.refBit()){ //if the ref bit is 0
 					found = true;
@@ -105,7 +105,7 @@ public class PageTable{
 			}
 		}
 
-		return pointer[process]++; //return pointer then move ahead one
+		return pointer[p]++; //return pointer then move ahead one
 	}
 
 	//returns true if the page of the access is in the table and false otherwise
@@ -140,7 +140,6 @@ public class PageTable{
 			output += "\nTotal memory accesses: " + accesses[i];
 			output += "\nTotal page faults: "     +	pageFaults[i];
 			output += "\nTotal writes to disk: "  + diskWrites[i];
-			return output;
 		}
 		return output;
 	}

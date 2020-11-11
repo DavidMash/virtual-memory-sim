@@ -19,10 +19,10 @@ public class vmsim{
 			numFrames = Integer.parseInt(args[1]);
 			pageSize = Integer.parseInt(args[3]);
 
-			pageOffsetSz = calculatePageOffset(pageSize); //send it in bytes
+			pageOffsetSz = calculateOffset(pageSize); //send it in bytes
 
-			String[] splitString = line.split(":");
-			memSplit = new memSplit[splitString.length];
+			String[] splitString = args[5].split(":");
+			memSplit = new int[splitString.length];
 			for(int i = 0; i < memSplit.length; i++){
 				memSplit[i] = Integer.parseInt(splitString[i]);
 			}
