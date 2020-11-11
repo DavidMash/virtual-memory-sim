@@ -21,27 +21,27 @@ public class PageTable{
 		numProcs  = split.length;
 		frames = new int[numProcs];
 
-		list	 = (ArrayList<MemoryAccess>[]) new ArrayList[numProcs];
+		list = (ArrayList<MemoryAccess>[]) new ArrayList[numProcs];
 		indexMap = (HashMap<Integer, Integer>[]) new HashMap[numProcs];
 
 		int totalShares = 0; //total number of memory units
 		for(int shares : split) totalShares += shares; //add all together
 
-		pointer    = new int[numProcs];
+		pointer = new int[numProcs];
 		diskWrites = new int[numProcs];
 		pageFaults = new int[numProcs];
-		accesses   = new int[numProcs];
+		accesses = new int[numProcs];
 
 		//seperate frames according to split and set init processes specific stuff
 		for(int i = 0; i < numProcs; i++){
-			frames[i] 		= (int)(numFrames * ((double)split[i] / totalShares));
-			list[i] 		= new ArrayList<>(frames[i]);
-			indexMap[i] 	= new HashMap<>(frames[i]);
+			frames[i] = (int)(numFrames * ((double)split[i] / totalShares));
+			list[i] = new ArrayList<>(frames[i]);
+			indexMap[i] = new HashMap<>(frames[i]);
 
-			pointer[i]	 	= 0;
-			diskWrites[i] 	= 0;
-			pageFaults[i] 	= 0;
-			accesses[i] 	= 0;
+			pointer[i] = 0;
+			diskWrites[i] = 0;
+			pageFaults[i] = 0;
+			accesses[i] = 0;
 
 			//if a table ended up with no frames then we can't run the simulation
 			if(frames[i] <= 0){
@@ -136,10 +136,10 @@ public class PageTable{
 		for(int i = 0; i < numProcs; i++){
 			if(i > 0) output += "\n-\n";
 			output += "For process " + i + ".";
-			output += "\nNumber of Frames: "  	  +	frames[i];
+			output += "\nNumber of Frames: " + frames[i];
 			output += "\nTotal memory accesses: " + accesses[i];
-			output += "\nTotal page faults: "     +	pageFaults[i];
-			output += "\nTotal writes to disk: "  + diskWrites[i];
+			output += "\nTotal page faults: " + pageFaults[i];
+			output += "\nTotal writes to disk: " + diskWrites[i];
 		}
 		return output;
 	}
