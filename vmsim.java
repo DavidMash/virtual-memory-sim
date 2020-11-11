@@ -1,3 +1,10 @@
+/*
+*	This is the driver for the virtual memory simulation. It reads in command-line args and a trace file.
+*	It runs the second chance scheduling algorithm and then outputs statistics on page faults and disk writes.
+*
+*	David Mash
+*/
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

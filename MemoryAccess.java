@@ -1,3 +1,10 @@
+/*
+*	This is a structure that simulates memory accesses in a virtual page table.
+*	They include 32-bit addresses, a dirty bit, and a reference bit for scheduling.
+*
+*	David Mash
+*/
+
 import java.math.*;
 
 public class MemoryAccess{
@@ -53,6 +60,6 @@ public class MemoryAccess{
 
 	//prints the page number
 	public String toString(){
-		return "\npage: "+page+" DB: "+dirtyBit+" RB: "+refBit;
+		return "page: "+page;
 	}
 }
